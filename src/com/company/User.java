@@ -10,22 +10,15 @@ import java.util.Random;
 import java.util.UUID;
 
 public class User {
-    private String firstname;
-    private String lastname;
     private UUID id;
     private String username;
-    private String department;
-    private String adress;
     private String password;
 
-    public User(String firstname, String lastname, String username, String password, String adress) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String username, String password) {
         this.username = username;
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = hashPassword(password);
-        this.adress = adress;
     }
 
     private String hashPassword(String password) {
@@ -42,33 +35,13 @@ public class User {
             System.out.println(enc.encodeToString(salt));
             return saltString + hashString;
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("No such algoithm!");
+            e.printStackTrace();
             return "";
         } catch (InvalidKeySpecException e) {
-            System.out.print("Invalid key");
+            e.printStackTrace();
             return "";
         }
 
-    }
-
-    public void changePassword(String newPassword){
-        this.password = hashPassword(newPassword);
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public String getFirstname() {
-        return firstname;
     }
 
     public UUID getId() {
@@ -77,5 +50,9 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
